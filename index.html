@@ -20,7 +20,55 @@
         </div>
       </div>
     </header>
+
     <main class="container">
+      <section class="search-section">
+        <form id="location-form">
+          <div class="form-group">
+            <label for ="location-input"> Locatie zoeken:</label>
+            <div class="search-input-container">
+              <input type="text" id="location-input" placeholder="Stad" required autocomplete="on">
+              <button type="submit">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+            <p id="location-error" class="error-message hidden"> Voer een geldige locatie in!</p>
+          </div>
+        </form>
+
+        <div class="filter-container">
+          <div class="filter-group">
+              <label for="temperature-filter">Filter op temperatuur:</label>
+              <select id="temperature-filter">
+                <option value="all">Alle temperaturen</option>
+                <option value="cold">Koud (&lt; 10°C)</option>
+                <option value="mild">Mild (10-20°C)</option>
+                <option value="warm">Warm (&gt; 20°C)</option>
+              </select>
+          </div>
+         
+         <div class="filter-group">
+            <label for="weather-filter">Filter op weersomstandigheid:</label>
+            <select id="weather-filter">
+              <option value="all">Alle weersomstandigheden</option>
+              <option value="clear">Helder</option>
+              <option value="cloudy">Bewolkt</option>
+              <option value="rain">Regen</option>
+              <option value="snow">Sneeuw</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="sort-options">Sorteren op:</label>
+            <select id="sort-options">
+              <option value="name-asc">Naam (A-Z)</option>
+              <option value="name-desc">Naam (Z-A)</option>
+              <option value="temp-asc">Temperatuur (laag-hoog)</option>
+              <option value="temp-desc">Temperatuur (hoog-laag)</option>
+            </select>
+          </div>
+        </div>
+      </section>
+    </nav>
     </main>
   </body>
 </html>

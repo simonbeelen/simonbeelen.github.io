@@ -7,8 +7,11 @@
     <title>Het Weerbericht</title>
     <link rel="stylesheet" href="src/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-sA+e2FkwY7ZzPZk+z2z0WBeNj7s9HC9Pnxz9v6iWy+E=" crossorigin=""/>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-o9N1jXqnhr7ixc1syVlnwDj/5SzT1vQ3hFzjFvJkDfk=" crossorigin=""></script>
   </head>
+
   <body>
     <header> 
       <div class="container">
@@ -42,40 +45,6 @@
           </div>
         </form>
 
-        <div class="filter-container">
-          <div class="filter-group">
-            <label for="temperature-filter">Filter op temperatuur:</label>
-            <select id="temperature-filter">
-              <option value="Alle">Alle temperaturen</option>
-              <option value="Koud">Koud (&lt; 10°C)</option>
-              <option value="Mild">Mild (10–20°C)</option>
-              <option value="Warm">Warm (&gt; 20°C)</option>
-            </select>
-          </div>
-         
-          <div class="filter-group">
-            <label for="weather-filter">Filter op weersomstandigheid:</label>
-            <select id="weather-filter">
-              <option value="Alle">Alle weersomstandigheden</option>
-              <option value="Helder">Helder</option>
-              <option value="Bewolkt">Bewolkt</option>
-              <option value="Regen">Regen</option>
-              <option value="Sneeuw">Sneeuw</option>
-            </select>
-          </div>
-
-          <div class="filter-group">
-            <label for="sort-options">Sorteren op:</label>
-            <select id="sort-options">
-              <option value="name-asc">Naam (A–Z)</option>
-              <option value="name-desc">Naam (Z–A)</option>
-              <option value="temp-asc">Temperatuur (laag–hoog)</option>
-              <option value="temp-desc">Temperatuur (hoog–laag)</option>
-            </select>
-          </div>
-        </div>
-      </section>
-
       <section id="current-weather" class="weather-section active">
         <div class="loader hidden">
           <div class="spinner"></div>
@@ -83,7 +52,9 @@
         </div>
 
         <div id="weather-container" class="weather-grid"></div>
-
+        
+        <div id="map" style="height: 400px; margin-top: 1rem;"></div>
+        
         <div id="no-weather-data" class="message-container hidden">
           <p>Zoek naar een locatie om het weer te bekijken.</p>
         </div>

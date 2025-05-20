@@ -1,3 +1,4 @@
+import L from 'leaflet';
 // Variabelen voor DOM elementen
 const body = document.body;
 const themeToggleBtn = document.getElementById('theme-toggle-btn');
@@ -305,6 +306,7 @@ locationForm.addEventListener('submit', async e => {
     weatherContainer.innerHTML = `<div class="loader"><div class="spinner"></div><p>Weerdata laden...</p></div>`;
 
     const coords = await fetchCoords(city);
+    initMap(coords.lat, coords.lon);
     const currentWeather = await fetchWeather(coords.lat, coords.lon);
     const forecast = await fetchForecast(coords.lat, coords.lon);
 
@@ -316,4 +318,46 @@ locationForm.addEventListener('submit', async e => {
   } catch (error) {
     weatherContainer.innerHTML = `<p>Fout bij laden van weerdata: ${error.message}</p>`;
   }
+});
+let map;
+
+function initMap(lat, lon) {
+  const mapContainer = document.getElementById('map');
+  if (!mapContainer) return;
+
+  if (map) {
+    map.setView([lat, lon], 10);
+    return;
+  }
+
+  map = L.map('map').setView([lat, lon], 10);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Kaartgegevens © OpenStreetMap-bijdragers',
+    maxZoom: 18,
+  }).addTo(map);
+
+  L.marker([lat, lon]).addTo(map)
+    .bindPopup('Huidige locatie')
+    .openPopup();
+}
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+
+    document.querySelectorAll('.weather-section').forEach(section => {
+      section.classList.add('hidden');
+    });
+    document.getElementById(tab).classList.remove('hidden');
+
+    // fix: kaart opnieuw laden als current-weather wordt geopend
+    if (tab === 'current-weather' && typeof map !== 'undefined') {
+      setTimeout(() => {
+        map.invalidateSize();
+      }, 300);
+    }
+
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
 });

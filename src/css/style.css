@@ -345,6 +345,23 @@ header .container {
   padding: 2rem;
   position: relative;
 }
+.filter-container {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.filter-container label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+}
+
+.filter-container input[type="range"] {
+  width: 150px;
+}
 
 .close-btn {
   position: absolute;
@@ -372,6 +389,32 @@ header .container {
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
+/* Zorg dat de sectie scrollt als nodig */
+.weather-section {
+  position: relative;
+  overflow: auto;
+}
+
+/* De kaart zelf */
+#map {
+  width: 100%;
+  height: 300px;
+  max-width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  z-index: 0;
+  position: relative;
+}
+
+/* Zorg dat andere content erboven komt indien nodig */
+.forecast-container,
+.weather-card,
+.weather-section * {
+  position: relative;
+  z-index: 1;
+}
+
 
 @keyframes spin {
   to {

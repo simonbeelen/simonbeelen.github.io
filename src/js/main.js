@@ -1,24 +1,225 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+// Variabelen voor DOM elementen
+const body = document.body;
+const themeToggleBtn = document.getElementById('theme-toggle-btn');
+const themeIcon = themeToggleBtn.querySelector('i');
+const themeText = themeToggleBtn.querySelector('span');
+const locationForm = document.getElementById('location-form');
+const locationInput = document.getElementById('location-input');
+const locationError = document.getElementById('location-error');
+const weatherContainer = document.getElementById('weather-container');
+const favoritesContainer = document.getElementById('favorites-container');
+const favoritesCount = document.getElementById('favorites-count');
+const tabs = document.querySelectorAll('.tab-btn');
+const sections = document.querySelectorAll('.weather-section');
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
+
+let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+let currentWeatherData = [];
+
+// 1. Functie: Geocoding (stad naar coords) via Open-Meteo geocoding API
+async function fetchCoords(city) {
+  const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=nl&format=json`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error('Kon locatie niet vinden');
+  const data = await res.json();
+  if (!data.results || data.results.length === 0) throw new Error('Geen resultaten gevonden');
+  return {
+    lat: data.results[0].latitude,
+    lon: data.results[0].longitude,
+    name: data.results[0].name,
+    country: data.results[0].country
+  };
+}
+
+// 2. Functie: Weerdata ophalen via Open-Meteo API (huidig weer)
+async function fetchWeather(lat, lon) {
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=auto`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error('Kon weerdata niet ophalen');
+  const data = await res.json();
+  return data.current_weather;
+}
+
+// 3. Functie: Renderen van één weerkaart (voor huidig weer)
+function createWeatherCard(weather, location) {
+  const { temperature, windspeed, weathercode } = weather;
+
+  const weatherDescriptions = {
+    0: { icon: '☀️', text: 'Helder' },
+    1: { icon: '🌤️', text: 'Gedeeltelijk bewolkt' },
+    2: { icon: '⛅', text: 'Bewolkt' },
+    3: { icon: '☁️', text: 'Zwaar bewolkt' },
+    61: { icon: '🌧️', text: 'Regen' },
+    71: { icon: '❄️', text: 'Sneeuw' },
+  };
+
+  const weatherInfo = weatherDescriptions[weathercode] || { icon: '❓', text: 'Onbekend' };
+
+  const isFavorite = favorites.some(fav => fav.name === location.name && fav.country === location.country);
+
+  return `
+    <div class="weather-card">
+      <button class="favorite-btn" aria-label="Voeg toe aan favorieten" data-name="${location.name}" data-country="${location.country}">
+        <i class="${isFavorite ? 'fas' : 'far'} fa-heart"></i>
+      </button>
+      <h3>${location.name}, ${location.country}</h3>
+      <div class="weather-icon">${weatherInfo.icon}</div>
+      <div class="temperature">${temperature.toFixed(1)}°C</div>
+      <div class="weather-info">
+        <div class="info-item"><i class="fas fa-wind"></i> ${windspeed} km/h</div>
+        <div class="info-item">${weatherInfo.text}</div>
+      </div>
     </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+  `;
+}
 
-setupCounter(document.querySelector('#counter'))
+// 4. Functie: Render alle weerdata in container
+function renderWeatherList(weatherList) {
+  if (weatherList.length === 0) {
+    weatherContainer.innerHTML = '<p>Zoek naar een locatie om het weer te bekijken.</p>';
+    return;
+  }
+
+  weatherContainer.innerHTML = weatherList.map(item => createWeatherCard(item.weather, item.location)).join('');
+}
+
+// 5. Functie: Favorieten renderen
+function renderFavorites() {
+  if (favorites.length === 0) {
+    favoritesContainer.innerHTML = '<p>Je hebt nog geen favoriete locaties toegevoegd. Klik op het hartje bij een locatie om deze toe te voegen.</p>';
+    favoritesCount.textContent = '(0)';
+    return;
+  }
+
+  favoritesContainer.innerHTML = favorites.map(fav => `
+    <div class="weather-card">
+      <h3>${fav.name}, ${fav.country}</h3>
+      <div>Temperatuur: ${fav.temperature.toFixed(1)}°C</div>
+      <div><button class="remove-favorite-btn" data-name="${fav.name}" data-country="${fav.country}">Verwijder</button></div>
+    </div>
+  `).join('');
+  favoritesCount.textContent = `(${favorites.length})`;
+}
+
+// 6. Functie: Voeg locatie toe aan favorieten
+function addFavorite(weather, location) {
+  if (favorites.some(fav => fav.name === location.name && fav.country === location.country)) return;
+
+  favorites.push({
+    name: location.name,
+    country: location.country,
+    temperature: weather.temperature
+  });
+
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+  renderFavorites();
+}
+
+// 7. Functie: Verwijder locatie uit favorieten
+function removeFavorite(name, country) {
+  favorites = favorites.filter(fav => !(fav.name === name && fav.country === country));
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+  renderFavorites();
+}
+
+// 8. Tab wisselen
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+
+    sections.forEach(section => {
+      section.classList.add('hidden');
+      if (section.id === tab.dataset.tab) {
+        section.classList.remove('hidden');
+      }
+    });
+  });
+});
+
+// 9. Thema: day-night automatisch plus toggle met onthouden voorkeur
+function applyDayNightTheme() {
+  const hour = new Date().getHours();
+  if (hour >= 20 || hour < 6) {
+    body.classList.add('dark-theme');
+    localStorage.setItem('theme', 'dark');
+  } else {
+    body.classList.remove('dark-theme');
+    localStorage.setItem('theme', 'light');
+  }
+}
+
+function initTheme() {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    if (savedTheme === 'dark') {
+      body.classList.add('dark-theme');
+    } else {
+      body.classList.remove('dark-theme');
+    }
+  } else {
+    applyDayNightTheme();
+  }
+}
+
+themeToggleBtn.addEventListener('click', () => {
+  if (body.classList.contains('dark-theme')) {
+    body.classList.remove('dark-theme');
+    localStorage.setItem('theme', 'light');
+  } else {
+    body.classList.add('dark-theme');
+    localStorage.setItem('theme', 'dark');
+  }
+});
+
+initTheme();
+
+// 10.  favorieten klik op kaarten
+weatherContainer.addEventListener('click', e => {
+  if (e.target.closest('.favorite-btn')) {
+    const btn = e.target.closest('.favorite-btn');
+    const name = btn.dataset.name;
+    const country = btn.dataset.country;
+    const weatherItem = currentWeatherData.find(w => w.location.name === name && w.location.country === country);
+    if (!weatherItem) return;
+    addFavorite(weatherItem.weather, weatherItem.location);
+
+    btn.querySelector('i').classList.remove('far');
+    btn.querySelector('i').classList.add('fas');
+  }
+});
+
+// 11.  verwijder favoriet
+favoritesContainer.addEventListener('click', e => {
+  if (e.target.classList.contains('remove-favorite-btn')) {
+    const btn = e.target;
+    removeFavorite(btn.dataset.name, btn.dataset.country);
+  }
+});
+
+// 12. Zoekformulier afhandelen
+locationForm.addEventListener('submit', async e => {
+  e.preventDefault();
+  locationError.classList.add('hidden');
+
+  const city = locationInput.value.trim();
+  if (!city) {
+    locationError.textContent = 'Voer een geldige locatie in!';
+    locationError.classList.remove('hidden');
+    return;
+  }
+
+  try {
+    weatherContainer.innerHTML = `<div class="loader"><div class="spinner"></div><p>Weerdata laden...</p></div>`;
+
+    const coords = await fetchCoords(city);
+    const currentWeather = await fetchWeather(coords.lat, coords.lon);
+
+    currentWeatherData = [{ weather: currentWeather, location: coords }];
+
+    renderWeatherList(currentWeatherData);
+
+  } catch (error) {
+    weatherContainer.innerHTML = `<p>Fout bij laden van weerdata: ${error.message}</p>`;
+  }
+});

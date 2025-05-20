@@ -45,21 +45,21 @@
           <div class="filter-group">
             <label for="temperature-filter">Filter op temperatuur:</label>
             <select id="temperature-filter">
-              <option value="all">Alle temperaturen</option>
-              <option value="cold">Koud (&lt; 10°C)</option>
-              <option value="mild">Mild (10–20°C)</option>
-              <option value="warm">Warm (&gt; 20°C)</option>
+              <option value="Alle">Alle temperaturen</option>
+              <option value="Koud">Koud (&lt; 10°C)</option>
+              <option value="Mild">Mild (10–20°C)</option>
+              <option value="Warm">Warm (&gt; 20°C)</option>
             </select>
           </div>
          
           <div class="filter-group">
             <label for="weather-filter">Filter op weersomstandigheid:</label>
             <select id="weather-filter">
-              <option value="all">Alle weersomstandigheden</option>
-              <option value="clear">Helder</option>
-              <option value="cloudy">Bewolkt</option>
-              <option value="rain">Regen</option>
-              <option value="snow">Sneeuw</option>
+              <option value="Alle">Alle weersomstandigheden</option>
+              <option value="Helder">Helder</option>
+              <option value="Bewolkt">Bewolkt</option>
+              <option value="Regen">Regen</option>
+              <option value="Sneeuw">Sneeuw</option>
             </select>
           </div>
 
@@ -93,6 +93,13 @@
         <div id="no-forecast-data" class="message-container hidden">
           <p>Selecteer eerst een locatie om de voorspelling te bekijken.</p>
         </div>
+
+        <div id="forecast-container">
+          <p>Zoek eerst een locatie en klik dan op een knop om voorspelling te laden.</p>
+          <button id="load-forecast-btn" disabled>Laad voorspelling</button>
+          <div id="forecast-data"></div>
+        </div>
+
       </section>
 
       <section id="favorites" class="weather-section hidden">
@@ -117,6 +124,6 @@
       </div>
     </footer>
 
-    <script type="module" src="src/main.js"></script>
+    <script type="module" src="src/js/main.js"></script>
   </body>
 </html>

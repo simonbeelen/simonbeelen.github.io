@@ -26,6 +26,7 @@
   box-sizing: border-box;
 }
 
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
@@ -67,16 +68,20 @@ header .container {
   align-items: center;
 }
 #theme-toggle-btn {
+  background-color: transparent;
+  border: #34495e;
+  color: #b5b5b5;
+  font-size: 1rem;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  color: white;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
-  padding: 0.5rem 1rem;
-  transition: var(--transition);
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  transition: color 0.3s;
 }
+
 #theme-toggle-btn:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: #2980b9;
 }
 #theme-toggle-btn i {
   margin-right: 8px;

@@ -306,7 +306,6 @@ locationForm.addEventListener('submit', async e => {
     weatherContainer.innerHTML = `<div class="loader"><div class="spinner"></div><p>Weerdata laden...</p></div>`;
 
     const coords = await fetchCoords(city);
-    initMap(coords.lat, coords.lon);
     const currentWeather = await fetchWeather(coords.lat, coords.lon);
     const forecast = await fetchForecast(coords.lat, coords.lon);
 
@@ -319,45 +318,57 @@ locationForm.addEventListener('submit', async e => {
     weatherContainer.innerHTML = `<p>Fout bij laden van weerdata: ${error.message}</p>`;
   }
 });
-let map;
+let map; // globale kaartvariabele
 
-function initMap(lat, lon) {
-  const mapContainer = document.getElementById('map');
-  if (!mapContainer) return;
+async function getCoordinates(place) {
+  const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(place)}`;
+  const response = await fetch(url);
+  const data = await response.json();
 
+  if (data && data.length > 0) {
+    return {
+      lat: parseFloat(data[0].lat),
+      lon: parseFloat(data[0].lon)
+    };
+  } else {
+    throw new Error("Locatie niet gevonden");
+  }
+}
+
+function showMap(lat, lon) {
   if (map) {
-    map.setView([lat, lon], 10);
-    return;
+    map.remove(); // verwijder oude kaart
   }
 
-  map = L.map('map').setView([lat, lon], 10);
+  map = L.map('map').setView([lat, lon], 13);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: 'Kaartgegevens © OpenStreetMap-bijdragers',
-    maxZoom: 18,
+    attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
   L.marker([lat, lon]).addTo(map)
-    .bindPopup('Huidige locatie')
+    .bindPopup(`Locatie: ${lat.toFixed(4)}, ${lon.toFixed(4)}`)
     .openPopup();
 }
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const tab = btn.dataset.tab;
 
-    document.querySelectorAll('.weather-section').forEach(section => {
-      section.classList.add('hidden');
-    });
-    document.getElementById(tab).classList.remove('hidden');
+// Zoekformulier handler
+document.getElementById('location-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-    // fix: kaart opnieuw laden als current-weather wordt geopend
-    if (tab === 'current-weather' && typeof map !== 'undefined') {
-      setTimeout(() => {
-        map.invalidateSize();
-      }, 300);
-    }
+  const input = document.getElementById('location-input');
+  const place = input.value.trim();
 
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  });
+  if (!place) {
+    alert("Voer een locatie in");
+    return;
+  }
+
+  try {
+    const coords = await getCoordinates(place);
+    showMap(coords.lat, coords.lon);
+  } catch (error) {
+    alert("Locatie niet gevonden, probeer een andere.");
+    console.error(error);
+  }
 });
+

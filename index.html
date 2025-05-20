@@ -5,13 +5,13 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Het Weerbericht</title>
-    <link rel="stylesheet" href="src\css\style.css">
+    <link rel="stylesheet" href="src/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
   </head>
   <body>
     <header> 
       <div class="container">
-        <h1> Het weer</h1>
+        <h1>Het weer</h1>
         <nav class="tabs">
           <button class="tab-btn active" data-tab="current-weather">Huidig weer</button>
           <button class="tab-btn" data-tab="forecast">Voorspelling</button>
@@ -20,7 +20,7 @@
         <div class="theme-toggle">
           <button id="theme-toggle-btn">
             <i class="fas fa-moon"></i>
-            <span>Nacht Modus</span>
+            <span>Nachtmodus</span>
           </button>
         </div>
       </div>
@@ -30,29 +30,29 @@
       <section class="search-section">
         <form id="location-form">
           <div class="form-group">
-            <label for ="location-input"> Locatie zoeken:</label>
+            <label for="location-input">Locatie zoeken:</label>
             <div class="search-input-container">
               <input type="text" id="location-input" placeholder="Stad" required autocomplete="on">
               <button type="submit">
                 <i class="fas fa-search"></i>
               </button>
             </div>
-            <p id="location-error" class="error-message hidden"> Voer een geldige locatie in!</p>
+            <p id="location-error" class="error-message hidden">Voer een geldige locatie in!</p>
           </div>
         </form>
 
         <div class="filter-container">
           <div class="filter-group">
-              <label for="temperature-filter">Filter op temperatuur:</label>
-              <select id="temperature-filter">
-                <option value="all">Alle temperaturen</option>
-                <option value="cold">Koud (&lt; 10°C)</option>
-                <option value="mild">Mild (10-20°C)</option>
-                <option value="warm">Warm (&gt; 20°C)</option>
-              </select>
+            <label for="temperature-filter">Filter op temperatuur:</label>
+            <select id="temperature-filter">
+              <option value="all">Alle temperaturen</option>
+              <option value="cold">Koud (&lt; 10°C)</option>
+              <option value="mild">Mild (10–20°C)</option>
+              <option value="warm">Warm (&gt; 20°C)</option>
+            </select>
           </div>
          
-         <div class="filter-group">
+          <div class="filter-group">
             <label for="weather-filter">Filter op weersomstandigheid:</label>
             <select id="weather-filter">
               <option value="all">Alle weersomstandigheden</option>
@@ -66,10 +66,10 @@
           <div class="filter-group">
             <label for="sort-options">Sorteren op:</label>
             <select id="sort-options">
-              <option value="name-asc">Naam (A-Z)</option>
-              <option value="name-desc">Naam (Z-A)</option>
-              <option value="temp-asc">Temperatuur (laag-hoog)</option>
-              <option value="temp-desc">Temperatuur (hoog-laag)</option>
+              <option value="name-asc">Naam (A–Z)</option>
+              <option value="name-desc">Naam (Z–A)</option>
+              <option value="temp-asc">Temperatuur (laag–hoog)</option>
+              <option value="temp-desc">Temperatuur (hoog–laag)</option>
             </select>
           </div>
         </div>
@@ -78,13 +78,13 @@
       <section id="current-weather" class="weather-section active">
         <div class="loader hidden">
           <div class="spinner"></div>
-          <p>Weer data laden...</p>
+          <p>Weerdata laden...</p>
         </div>
 
-       <div id="weather-container" class="weather-grid"></div>
+        <div id="weather-container" class="weather-grid"></div>
 
-       <div id="no-weather-data" class="message-container hidden">
-        <p>Zoek naar een locatie om het weer te bekijken.</p>
+        <div id="no-weather-data" class="message-container hidden">
+          <p>Zoek naar een locatie om het weer te bekijken.</p>
         </div>
       </section>
 
@@ -97,9 +97,8 @@
 
       <section id="favorites" class="weather-section hidden">
         <div id="favorites-container" class="weather-grid"></div>
-      
         <div id="no-favorites" class="message-container">
-          <p>Je hebt nog geen favoriete locaties toegevoegd. Klik op het hartje bij een locatie om deze toe te voegen aan je favorieten.</p>
+          <p>Je hebt nog geen favoriete locaties toegevoegd. Klik op het hartje bij een locatie om deze toe te voegen.</p>
         </div>
       </section>
 
@@ -107,18 +106,17 @@
         <button id="close-detail" class="close-btn">
           <i class="fas fa-times"></i>
         </button>
-        <div id="detail-content">
-        </div>
-     </section>
+        <div id="detail-content"></div>
+      </section>
     </main>
 
     <footer>
       <div class="container">
-        <p>Weer data door <a href="https://open-meteo.com/" target="_blank">Open-Meteo.com</a></p>
-       <p>Gemaakt voor Web Advanced Project door simon beelen </p>
-     </div>
+        <p>Weerdata via <a href="https://open-meteo.com/" target="_blank">Open-Meteo.com</a></p>
+        <p>Project voor Web Advanced, gemaakt door Simon Beelen (student EhB)</p>
+      </div>
     </footer>
 
-    <script type="module" src="src\main.jss"></script>
+    <script type="module" src="src/main.js"></script>
   </body>
 </html>

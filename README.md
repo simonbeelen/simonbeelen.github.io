@@ -1,2 +1,0 @@
-# weerbericht
-Project Web Advancced 

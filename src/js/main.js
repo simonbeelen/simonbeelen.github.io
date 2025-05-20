@@ -11,7 +11,8 @@ const favoritesContainer = document.getElementById('favorites-container');
 const favoritesCount = document.getElementById('favorites-count');
 const tabs = document.querySelectorAll('.tab-btn');
 const sections = document.querySelectorAll('.weather-section');
-
+const forecastContainer = document.querySelector('.forecast-container');
+const noForecastMessage = document.getElementById('no-forecast-data');
 
 let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 let currentWeatherData = [];
@@ -38,6 +39,14 @@ async function fetchWeather(lat, lon) {
   if (!res.ok) throw new Error('Kon weerdata niet ophalen');
   const data = await res.json();
   return data.current_weather;
+}
+// Functie: Weervoorspellingen ophalen via Open-Meteo API (7-daagse forecast)
+async function fetchForecast(lat, lon) {
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_sum&timezone=auto`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error('Kon voorspellingen niet ophalen');
+  const data = await res.json();
+  return data.daily;
 }
 
 // 3. Functie: Renderen van één weerkaart (voor huidig weer)
@@ -82,6 +91,50 @@ function renderWeatherList(weatherList) {
 
   weatherContainer.innerHTML = weatherList.map(item => createWeatherCard(item.weather, item.location)).join('');
 }
+function renderForecast(daily) {
+  if (!daily || !daily.time || daily.time.length === 0) {
+    forecastContainer.innerHTML = '<p>Geen voorspellingen beschikbaar.</p>';
+    return;
+  }
+
+  const weatherDescriptions = {
+    0: 'Helder ☀️',
+    1: 'Gedeeltelijk bewolkt 🌤️',
+    2: 'Bewolkt ⛅',
+    3: 'Zwaar bewolkt ☁️',
+    61: 'Regen 🌧️',
+    71: 'Sneeuw ❄️',
+  };
+
+  // Bouw de forecast cards
+  const forecastHTML = daily.time.map((date, i) => {
+  const maxTemp = daily.temperature_2m_max[i];
+  const minTemp = daily.temperature_2m_min[i];
+  const weathercode = daily.weathercode[i];
+  const precipitation = daily.precipitation_sum[i]; // neerslag mm
+  const desc = weatherDescriptions[weathercode] || 'Onbekend ❓';
+
+    return `
+      <div class="forecast-day">
+        <div class="date">${date}</div>
+        <div class="weather-desc">${desc}</div>
+        <div class="temp">Max: ${maxTemp}°C</div>
+        <div class="temp">Min: ${minTemp}°C</div>
+        <div class="precipitation">Neerslag: ${precipitation} mm</div>
+      </div>
+    `;
+  }).join('');
+
+  // Forecast kaarten injecteren
+  forecastContainer.innerHTML = `
+    <div class="forecast-list">${forecastHTML}</div>
+    <canvas id="precipitationChart" width="400" height="200"></canvas>
+  `;
+
+  // Na injectie: grafiek tekenen
+  drawPrecipitationChart(daily.time, daily.precipitation_sum);
+}
+
 
 // 5. Functie: Favorieten renderen
 function renderFavorites() {
@@ -162,6 +215,45 @@ function initTheme() {
   }
 }
 
+function drawPrecipitationChart(dates, precipitation) {
+  const ctx = document.getElementById('precipitationChart').getContext('2d');
+
+  if (window.precipitationChartInstance) {
+    window.precipitationChartInstance.destroy();
+  }
+
+  window.precipitationChartInstance = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: dates,
+      datasets: [{
+        label: 'Neerslag (mm)',
+        data: precipitation,
+        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1,
+        borderRadius: 5,
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: { display: true, text: 'mm neerslag' }
+        },
+        x: {
+          title: { display: true, text: 'Datum' }
+        }
+      },
+      plugins: {
+        legend: { display: false }
+      },
+      responsive: true,
+      maintainAspectRatio: false,
+    }
+  });
+}
+
 themeToggleBtn.addEventListener('click', () => {
   if (body.classList.contains('dark-theme')) {
     body.classList.remove('dark-theme');
@@ -214,10 +306,12 @@ locationForm.addEventListener('submit', async e => {
 
     const coords = await fetchCoords(city);
     const currentWeather = await fetchWeather(coords.lat, coords.lon);
+    const forecast = await fetchForecast(coords.lat, coords.lon);
 
     currentWeatherData = [{ weather: currentWeather, location: coords }];
 
     renderWeatherList(currentWeatherData);
+    renderForecast(forecast);
 
   } catch (error) {
     weatherContainer.innerHTML = `<p>Fout bij laden van weerdata: ${error.message}</p>`;

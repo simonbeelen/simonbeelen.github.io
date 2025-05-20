@@ -88,12 +88,37 @@
         </div>
       </section>
 
+      <section id="forecast" class="weather-section hidden">
+        <div class="forecast-container"></div>
+        <div id="no-forecast-data" class="message-container hidden">
+          <p>Selecteer eerst een locatie om de voorspelling te bekijken.</p>
+        </div>
+      </section>
+
+      <section id="favorites" class="weather-section hidden">
+        <div id="favorites-container" class="weather-grid"></div>
+      
+        <div id="no-favorites" class="message-container">
+          <p>Je hebt nog geen favoriete locaties toegevoegd. Klik op het hartje bij een locatie om deze toe te voegen aan je favorieten.</p>
+        </div>
+      </section>
+
+      <section id="weather-detail" class="hidden">
+        <button id="close-detail" class="close-btn">
+          <i class="fas fa-times"></i>
+        </button>
+        <div id="detail-content">
+        </div>
+     </section>
     </main>
+
     <footer>
       <div class="container">
         <p>Weer data door <a href="https://open-meteo.com/" target="_blank">Open-Meteo.com</a></p>
        <p>Gemaakt voor Web Advanced Project door simon beelen </p>
      </div>
     </footer>
+    
+    <script type="module" src="./js/main.js"></script>
   </body>
 </html>

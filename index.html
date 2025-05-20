@@ -5,7 +5,7 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Het Weerbericht</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="src\style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
   </head>
   <body>
@@ -62,6 +62,7 @@
               <option value="snow">Sneeuw</option>
             </select>
           </div>
+
           <div class="filter-group">
             <label for="sort-options">Sorteren op:</label>
             <select id="sort-options">
@@ -73,11 +74,19 @@
           </div>
         </div>
       </section>
+
       <section id="current-weather" class="weather-section active">
-      <div class="loader hidden">
-        <div class="spinner"></div>
-        <p>Weer data laden...</p>
-      </div>
+        <div class="loader hidden">
+          <div class="spinner"></div>
+          <p>Weer data laden...</p>
+        </div>
+
+       <div id="weather-container" class="weather-grid"></div>
+
+       <div id="no-weather-data" class="message-container hidden">
+        <p>Zoek naar een locatie om het weer te bekijken.</p>
+        </div>
+      </section>
 
     </main>
     <footer>

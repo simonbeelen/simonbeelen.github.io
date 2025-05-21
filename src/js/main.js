@@ -371,4 +371,43 @@ document.getElementById('location-form').addEventListener('submit', async (e) =>
     console.error(error);
   }
 });
+function createWeatherListItem(label, value) {
+  return value !== undefined ? `<li>${label}: ${value}</li>` : '';
+}
 
+function updateExtraWeatherInfo(data) {
+  if (!data) {
+    extraWeatherInfo.innerHTML = '<p>Geen extra weerinformatie beschikbaar.</p>';
+    return;
+  }
+
+  const { hourly, daily } = data;
+  if (!hourly || !daily) {
+    extraWeatherInfo.innerHTML = '<p>Geen geldige weerdata gevonden.</p>';
+    return;
+  }
+
+  if (!Array.isArray(checkedFilters)) {
+    extraWeatherInfo.innerHTML = '<p>Filters niet correct ingesteld.</p>';
+    return;
+  }
+
+  const html = ['<ul>'];
+
+  if (checkedFilters.includes('temperature') && hourly.temperature_2m) {
+    html.push(createWeatherListItem('Temperatuur', hourly.temperature_2m[0]));
+  }
+  if (checkedFilters.includes('precipitation') && hourly.precipitation) {
+    html.push(createWeatherListItem('Neerslag', hourly.precipitation[0]));
+  }
+  if (checkedFilters.includes('uv_index') && hourly.uv_index) {
+    html.push(createWeatherListItem('UV-index', hourly.uv_index[0]));
+  }
+  if (checkedFilters.includes('sunrise_sunset') && daily.sunrise && daily.sunset) {
+    html.push(createWeatherListItem('Zonsopgang', daily.sunrise[0]));
+    html.push(createWeatherListItem('Zonsondergang', daily.sunset[0]));
+  }
+
+  html.push('</ul>');
+  extraWeatherInfo.innerHTML = html.join('');
+}

@@ -5,25 +5,37 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Het Weerbericht</title>
-    <link rel="stylesheet" href="src/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"/>
+    <link rel="stylesheet" href="src/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"
+    />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-o9N1jXqnhr7ixc1syVlnwDj/5SzT1vQ3hFzjFvJkDfk=" crossorigin=""></script>
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-o9N1jXqnhr7ixc1syVlnwDj/5SzT1vQ3hFzjFvJkDfk="
+      crossorigin=""
+    ></script>
   </head>
 
   <body>
-    <header> 
+    <header>
       <div class="container">
         <h1>Het weer</h1>
         <nav class="tabs">
           <button class="tab-btn active" data-tab="current-weather">Huidig weer</button>
           <button class="tab-btn" data-tab="forecast">Voorspelling</button>
-          <button class="tab-btn" data-tab="favorites">Favorieten <span id="favorites-count">(0)</span></button>
+          <button class="tab-btn" data-tab="favorites">
+            Favorieten <span id="favorites-count">(0)</span>
+          </button>
         </nav>
         <div class="theme-toggle">
           <button id="theme-toggle-btn">
-            <i class="fas fa-moon"></i>
+            <i class="fas fa-moon" aria-hidden="true"></i>
             <span>Nachtmodus</span>
           </button>
         </div>
@@ -36,14 +48,23 @@
           <div class="form-group">
             <label for="location-input">Locatie zoeken:</label>
             <div class="search-input-container">
-              <input type="text" id="location-input" placeholder="Stad" required autocomplete="on">
+              <input
+                type="text"
+                id="location-input"
+                placeholder="Stad"
+                required
+                autocomplete="on"
+              />
               <button type="submit">
-                <i class="fas fa-search"></i>
+                <i class="fas fa-search" aria-hidden="true"></i>
               </button>
             </div>
-            <p id="location-error" class="error-message hidden">Voer een geldige locatie in!</p>
+            <p id="location-error" class="error-message hidden">
+              Voer een geldige locatie in!
+            </p>
           </div>
         </form>
+      </section>
 
       <section id="current-weather" class="weather-section active">
         <div class="loader hidden">
@@ -51,40 +72,107 @@
           <p>Weerdata laden...</p>
         </div>
 
+        <div id="weather-filters" class="filters">
+        <h3>Kies extra weerinfo:</h3>
+          <label class="switch-label">
+            <span><i class="fas fa-wind"></i> Windsnelheid</span>
+            <div class="switch">
+              <input type="checkbox" value="wind" checked />
+              <span class="slider"></span>
+            </div>
+          </label>
+
+          <label class="switch-label">
+            <span><i class="fas fa-tint"></i> Vochtigheid</span>
+            <div class="switch">
+              <input type="checkbox" value="humidity" checked />
+              <span class="slider"></span>
+            </div>
+          </label>
+
+          <label class="switch-label">
+            <span><i class="fas fa-sun"></i> Zonsopgang & zonsondergang</span>
+            <div class="switch">
+              <input type="checkbox" value="sunrise" checked />
+              <span class="slider"></span>
+            </div>
+          </label>
+
+          <label class="switch-label">
+            <span><i class="fas fa-gauge-high"></i> Luchtdruk</span>
+            <div class="switch">
+              <input type="checkbox" value="pressure" checked />
+              <span class="slider"></span>
+            </div>
+          </label>
+
+          <label class="switch-label">
+            <span><i class="fas fa-cloud-showers-heavy"></i> Neerslagkans</span>
+            <div class="switch">
+              <input type="checkbox" value="precipitation" checked />
+              <span class="slider"></span>
+            </div>
+          </label>
+
+          <label class="switch-label">
+            <span><i class="fas fa-sun-plant-wilt"></i> UV-index</span>
+            <div class="switch">
+              <input type="checkbox" value="uv" checked />
+              <span class="slider"></span>
+            </div>
+          </label>
+        </div>
+
+
+        <section id="extra-weather-info" class="hidden">
+          <h2>Extra Weerinformatie</h2>
+          <ul>
+            <li>Relatieve vochtigheid: <span id="humidity"></span>%</li>
+            <li>Luchtdruk (MSL): <span id="pressure"></span> hPa</li>
+            <li>Neerslag: <span id="precipitation"></span> mm</li>
+            <li>UV-index: <span id="uv-index"></span></li>
+            <li>Zonsopgang: <span id="sunrise"></span></li>
+            <li>Zonsondergang: <span id="sunset"></span></li>
+          </ul>
+        </section>
+
         <div id="weather-container" class="weather-grid"></div>
-        
+
         <div id="map" style="height: 400px; margin-top: 1rem;"></div>
-        
+
         <div id="no-weather-data" class="message-container hidden">
           <p>Zoek naar een locatie om het weer te bekijken.</p>
         </div>
-      </section>
+      </section>    
 
       <section id="forecast" class="weather-section hidden">
         <div class="forecast-container"></div>
         <div id="no-forecast-data" class="message-container hidden">
           <p>Selecteer eerst een locatie om de voorspelling te bekijken.</p>
         </div>
-        
 
         <div id="forecast-container">
-          <p>Zoek eerst een locatie en klik dan op een knop om voorspelling te laden.</p>
+          <p>
+            Zoek eerst een locatie en klik dan op een knop om voorspelling te laden.
+          </p>
           <button id="load-forecast-btn" disabled>Laad voorspelling</button>
           <div id="forecast-data"></div>
         </div>
-
       </section>
 
       <section id="favorites" class="weather-section hidden">
         <div id="favorites-container" class="weather-grid"></div>
         <div id="no-favorites" class="message-container">
-          <p>Je hebt nog geen favoriete locaties toegevoegd. Klik op het hartje bij een locatie om deze toe te voegen.</p>
+          <p>
+            Je hebt nog geen favoriete locaties toegevoegd. Klik op het hartje bij
+            een locatie om deze toe te voegen.
+          </p>  
         </div>
       </section>
 
       <section id="weather-detail" class="hidden">
         <button id="close-detail" class="close-btn">
-          <i class="fas fa-times"></i>
+          <i class="fas fa-times" aria-hidden="true"></i>
         </button>
         <div id="detail-content"></div>
       </section>
@@ -92,7 +180,12 @@
 
     <footer>
       <div class="container">
-        <p>Weerdata via <a href="https://open-meteo.com/" target="_blank">Open-Meteo.com</a></p>
+        <p>
+          Weerdata via
+          <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer"
+            >Open-Meteo.com</a
+          >
+        </p>
         <p>Project voor Web Advanced, gemaakt door Simon Beelen (student EhB)</p>
       </div>
     </footer>

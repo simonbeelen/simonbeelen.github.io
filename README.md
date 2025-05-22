@@ -124,3 +124,4 @@ Ook toevoeging van screenshots waarin deze vereiste werden gevraagd. Disclaimer 
          
        * npm run preview
 
+w

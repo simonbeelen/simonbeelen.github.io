@@ -123,5 +123,6 @@ Ook toevoeging van screenshots waarin deze vereiste werden gevraagd. Disclaimer 
        * npm run build
          
        * npm run preview
-
-w
+         
+## **Fotos App**
+* foto's desktop in white theme: 

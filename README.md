@@ -92,13 +92,13 @@ Ook toevoeging van screenshots waarin deze vereiste werden gevraagd. Disclaimer 
 ### CSS
 - Styles.css
 
-#**iNSTALLATIE**
-## **Vereisten**
+##**Installatie**
+### **Vereisten**
 - Node.js (versie 14+) https://nodejs.org/
 - NPM 
 - Git  (https://git-scm.com/
 
-## **Stappen**
+### **Stappen**
 
 **1. Clone de repository**
 

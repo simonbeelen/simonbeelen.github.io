@@ -336,40 +336,79 @@ main {
   border-radius: var(--border-radius);
   padding: 1.5rem;
   box-shadow: var(--shadow);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
 }
 
 .extra-weather-info h2 {
   margin-bottom: 1rem;
   color: var(--text-color);
   font-size: 1.25rem;
+  flex-shrink: 0;
 }
 
 .extra-weather-info ul {
   list-style: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .extra-weather-info li {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid var(--border-color);
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--bg-color);
   transition: var(--transition);
+  opacity: 1;
+  transform: translateX(0);
 }
 
-.extra-weather-info li:last-child {
-  border-bottom: none;
+/* Verborgen items animatie */
+.extra-weather-info li.hidden {
+  display: none !important;
+}
+
+.extra-weather-info li:hover {
+  background-color: var(--card-bg);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.extra-weather-info li .info-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
 }
 
 .extra-weather-info li i {
   color: var(--primary-color);
   width: 20px;
-  margin-right: 0.5rem;
+  flex-shrink: 0;
 }
 
-.extra-weather-info span {
+.extra-weather-info li .info-value {
   font-weight: 600;
   color: var(--primary-color);
+  min-width: 60px;
+  text-align: right;
+}
+
+/* Lege state styling */
+.extra-weather-info.empty-state {
+  justify-content: center;
+  align-items: center;
+  color: var(--light-text);
+  font-style: italic;
+}
+
+.extra-weather-info.empty-state ul {
+  display: none;
 }
 
 /* ================================

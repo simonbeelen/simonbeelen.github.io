@@ -1,4 +1,5 @@
-// Importeer Leaflet voor het renderen van de kaart
+
+import "leaflet/src/Leaflet.js";
 import L from 'leaflet';
 
 // ======================================

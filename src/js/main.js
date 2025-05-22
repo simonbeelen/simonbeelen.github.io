@@ -1,7 +1,5 @@
 
 import "leaflet/src/Leaflet.js";
-import L from ".leaflet/src/Leaflet.js";
-
 // ======================================
 // DOM-ELEMENTEN
 // ======================================

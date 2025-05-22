@@ -144,6 +144,7 @@ Ook toevoeging van screenshots waarin deze vereiste werden gevraagd. Disclaimer 
 * Leaflet: https://www.youtube.com/watch?v=F1QUcMqJIhA&list=PLOLaRvvlbZ1_RyfbXIQcVpIrg9HylJJPh&index=3
 * Chart.js: https://www.w3schools.com/ai/ai_chartjs.asp
 * Font Awesome: https://www.youtube.com/watch?v=7nJN12cHyv8
+* Iphone weerapp: layout
 ### AI-assistentie
 * hulp bij opbouw ReadMe: https://claude.ai/share/144272bc-2a3c-4e53-af3c-26e6b35e96c4
 * verbetering en opruiming van mijn code: https://claude.ai/share/8975871d-decc-4011-83a0-6458165c3864

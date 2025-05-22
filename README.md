@@ -125,4 +125,5 @@ Ook toevoeging van screenshots waarin deze vereiste werden gevraagd. Disclaimer 
        * npm run preview
          
 ## **Fotos App**
-* foto's desktop in white theme: 
+* [foto's desktop in white theme](https://github.com/simonbeelen/simonbeelen.github.io/tree/39f499ac2882f15c5f39bffed38462f0cb01e43b/screenshots/White%20Mode%20Desktop)
+* [foto's desktop in dark theme](https://github.com/simonbeelen/simonbeelen.github.io/tree/39f499ac2882f15c5f39bffed38462f0cb01e43b/screenshots/Dark%20Mode%20Desktop)

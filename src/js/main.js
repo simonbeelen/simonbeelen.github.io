@@ -39,6 +39,28 @@ let map; // Leaflet kaart
 // ======================================
 // HELPER FUNCTIES
 // ======================================
+function setupIntersectionObserver(targetElement, callback) {
+  if (!targetElement) return;
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        callback();
+        observer.unobserve(targetElement); 
+      }
+    });
+  }, { threshold: 0.1 });
+
+  observer.observe(targetElement);
+}
+setupIntersectionObserver(extraWeatherInfo, async () => {
+  
+  if (currentWeatherData && currentWeatherData[0]) {
+    const { lat, lon } = currentWeatherData[0].location;
+    const extraData = await fetchExtraWeatherData(lat, lon);
+    updateExtraWeatherInfo(extraData);
+  }
+});
 
 // KAART-FUNCTIES
 function initMap(lat, lon) {
@@ -351,7 +373,7 @@ function renderFavorites() {
   safeSetTextContent('favorites-count', `(${favorites.length})`);
 }
 
-// 6. Verbeterde neerslaggrafiek
+// 6.  neerslaggrafiek
 function drawPrecipitationChart(dates, precipitation) {
   const canvas = document.getElementById('precipitationChart');
   if (!canvas) {
@@ -585,7 +607,7 @@ function applyDayNightTheme() {
 // ======================================
 
 // 1. Thema toggle
-if (themeToggleBtn) {
+  if (themeToggleBtn) {
   themeToggleBtn.addEventListener('click', () => {
     body.classList.toggle('dark');
     body.classList.toggle('light');
@@ -733,7 +755,7 @@ favoritesContainer.addEventListener('click', e => {
   }
 });
 
-// 6. Extra info filters (checkboxes) met verbeterde event handling
+// 6. Extra info filters (checkboxes) met  event handling
 infoFilters.forEach(checkbox => {
   checkbox.addEventListener('change', () => {
     applyInfoFilters();

@@ -109,22 +109,18 @@ Ook toevoeging van screenshots waarin deze vereiste werden gevraagd. Disclaimer 
     2. Ga naar de project folder
     
         * cd Weerbericht
+        
 **2. Dependencies installeren**
 
   1. Installeer alle nodige packages
 
-     * npm install
+       * npm install
     
 **3. Opstarten Productie Build en deployment**
 
   1. Build de applicatie en bekijk een preview
 
-     * npm run build
-     * npm run preview
-
-  2. Er is nu een dist/ folder gemaakt
-
-  3. Upload de dist/ folder naar je webserver 
-
-  4. Populaire webhosting optie: Github Pages
+       * npm run build
+         
+       * npm run preview
 

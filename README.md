@@ -92,7 +92,7 @@ Ook toevoeging van screenshots waarin deze vereiste werden gevraagd. Disclaimer 
 ### CSS
 - Styles.css
 
-##**Installatie**
+## **Installatie**
 ### **Vereisten**
 - Node.js (versie 14+) https://nodejs.org/
 - NPM 

@@ -104,7 +104,7 @@ Ook toevoeging van screenshots waarin deze vereiste werden gevraagd. Disclaimer 
 
     1. Open de Terminal/Comand Prompt 
     
-        * git clone https://github.com/simonbeelen/weerbericht.git
+        * git clone https://github.com/simonbeelen/simonbeelen.github.io.git
         
     2. Ga naar de project folder
     

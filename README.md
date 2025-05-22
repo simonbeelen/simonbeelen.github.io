@@ -123,5 +123,27 @@ Ook toevoeging van screenshots waarin deze vereiste werden gevraagd. Disclaimer 
        * npm run build
          
        * npm run preview
-
-w
+         
+## **Fotos App**
+* [foto's desktop in white theme](https://github.com/simonbeelen/simonbeelen.github.io/tree/39f499ac2882f15c5f39bffed38462f0cb01e43b/screenshots/White%20Mode%20Desktop)
+* [foto's desktop in dark theme](https://github.com/simonbeelen/simonbeelen.github.io/tree/39f499ac2882f15c5f39bffed38462f0cb01e43b/screenshots/Dark%20Mode%20Desktop)
+  
+## **Gebruikte tools en libraries**
+* vite: https://vite.dev/guide/
+* Leaflet: https://leafletjs.com/
+* Chart.js: https://www.chartjs.org/
+* Font Awesome: https://fontawesome.com/
+* Open-Meteo API: https://open-meteo.com/
+  
+## **Gebruikte bronnen en AI assistentie**
+### Bronnen
+* vite: https://www.freecodecamp.org/news/get-started-with-vite/
+* Leaflet: https://www.youtube.com/watch?v=xHmS4OpcEOc
+* Leaflet: https://www.youtube.com/watch?v=q5g3P929dNw
+* Leaflet: https://www.youtube.com/watch?v=F1QUcMqJIhA&list=PLOLaRvvlbZ1_RyfbXIQcVpIrg9HylJJPh&index=3
+* Chart.js: https://www.w3schools.com/ai/ai_chartjs.asp
+* Font Awesome: https://www.youtube.com/watch?v=7nJN12cHyv8
+### AI-assistentie
+* hulp bij opbouw ReadMe: https://claude.ai/share/144272bc-2a3c-4e53-af3c-26e6b35e96c4
+* verbetering en opruiming van mijn code: https://claude.ai/share/8975871d-decc-4011-83a0-6458165c3864
+* Vragen gesteld en ideeën gekregen over de functionaliteit van mijn app: https://chatgpt.com/share/682f409a-ac2c-8007-90a9-18a7cea3682a

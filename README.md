@@ -108,7 +108,7 @@ Ook toevoeging van screenshots waarin deze vereiste werden gevraagd. Disclaimer 
         
     2. Ga naar de project folder
     
-        * cd Weerbericht
+        * cd simonbeelen.github.io
         
 **2. Dependencies installeren**
 

@@ -1,5 +1,5 @@
 
-import "leaflet/src/Leaflet.js";
+import "leaflet";
 // ======================================
 // DOM-ELEMENTEN
 // ======================================

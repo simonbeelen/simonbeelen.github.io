@@ -81,89 +81,90 @@
           </div>
 
           <!-- 2: Extra info -->
-          <section class="extra-weather-info" id="extra-weather-info">
-            <h2>Extra Weerinformatie</h2>
-            <ul>
-              <li class="filter-wind"><i class="fas fa-wind"></i> Windsnelheid: <span id="wind">-</span> km/u</li>
-              <li class="filter-humidity"><i class="fas fa-tint"></i> Vochtigheid: <span id="humidity">-</span>%</li>
-              <li class="filter-sunrise"><i class="fas fa-sun"></i> Zonsopgang: <span id="sunrise">-</span></li>
-              <li class="filter-sunset"><i class="fas fa-moon"></i> Zonsondergang: <span id="sunset">-</span></li>
-              <li class="filter-pressure"><i class="fas fa-gauge-high"></i> Luchtdruk: <span id="pressure">-</span> hPa</li>
-              <li class="filter-precipitation"><i class="fas fa-cloud-showers-heavy"></i> Neerslag: <span id="precipitation">-</span> mm</li>
-              <li class="filter-uv"><i class="fas fa-sun-plant-wilt"></i> UV-index: <span id="uv-index">-</span></li>
-            </ul>
-          </section>
+          <div class="info-sliders-container">
+            <section class="extra-weather-info" id="extra-weather-info">
+              <h2>Extra Weerinformatie</h2>
+              <ul>
+                <li class="filter-wind"><i class="fas fa-wind"></i> Windsnelheid: <span id="wind">-</span> km/u</li>
+                <li class="filter-humidity"><i class="fas fa-tint"></i> Vochtigheid: <span id="humidity">-</span>%</li>
+                <li class="filter-sunrise"><i class="fas fa-sun"></i> Zonsopgang: <span id="sunrise">-</span></li>
+                <li class="filter-sunset"><i class="fas fa-moon"></i> Zonsondergang: <span id="sunset">-</span></li>
+                <li class="filter-pressure"><i class="fas fa-gauge-high"></i> Luchtdruk: <span id="pressure">-</span> hPa</li>
+                <li class="filter-precipitation"><i class="fas fa-cloud-showers-heavy"></i> Neerslag: <span id="precipitation">-</span> mm</li>
+                <li class="filter-uv"><i class="fas fa-sun-plant-wilt"></i> UV-index: <span id="uv-index">-</span></li>
+              </ul>
+            </section>
 
-          <!-- 3: Sliders -->
-          <div class="filters" id="weather-filters">
-            <h3>Kies extra weerinfo:</h3>
+            <!-- 3: Sliders -->
+            <div class="filters" id="weather-filters">
+              <h3>Kies extra weerinfo:</h3>
 
-            <label class="switch-label">
-              <span><i class="fas fa-wind"></i> Windsnelheid</span>
-              <div>
-                <div class="switch">
-                  <input type="checkbox" value="wind" checked />
-                  <span class="slider"></span>
+              <label class="switch-label">
+                <span><i class="fas fa-wind"></i> Windsnelheid</span>
+                <div>
+                  <div class="switch">
+                    <input type="checkbox" value="wind" checked />
+                    <span class="slider"></span>
+                  </div>
+                  <span class="status">Aan</span>
                 </div>
-                <span class="status">Aan</span>
-              </div>
-            </label>
+              </label>
 
-            <label class="switch-label">
-              <span><i class="fas fa-tint"></i> Vochtigheid</span>
-              <div>
-                <div class="switch">
-                  <input type="checkbox" value="humidity" checked />
-                  <span class="slider"></span>
+              <label class="switch-label">
+                <span><i class="fas fa-tint"></i> Vochtigheid</span>
+                <div>
+                  <div class="switch">
+                    <input type="checkbox" value="humidity" checked />
+                    <span class="slider"></span>
+                  </div>
+                  <span class="status">Aan</span>
                 </div>
-                <span class="status">Aan</span>
-              </div>
-            </label>
+              </label>
 
-            <label class="switch-label">
-              <span><i class="fas fa-sun"></i> Zonsopgang & zonsondergang</span>
-              <div>
-                <div class="switch">
-                  <input type="checkbox" value="sunrise" checked />
-                  <span class="slider"></span>
+              <label class="switch-label">
+                <span><i class="fas fa-sun"></i> Zonsopgang & zonsondergang</span>
+                <div>
+                  <div class="switch">
+                    <input type="checkbox" value="sunrise" checked />
+                    <span class="slider"></span>
+                  </div>
+                  <span class="status">Aan</span>
                 </div>
-                <span class="status">Aan</span>
-              </div>
-            </label>
+              </label>
 
-            <label class="switch-label">
-              <span><i class="fas fa-gauge-high"></i> Luchtdruk</span>
-              <div>
-                <div class="switch">
-                  <input type="checkbox" value="pressure" checked />
-                  <span class="slider"></span>
+              <label class="switch-label">
+                <span><i class="fas fa-gauge-high"></i> Luchtdruk</span>
+                <div>
+                  <div class="switch">
+                    <input type="checkbox" value="pressure" checked />
+                    <span class="slider"></span>
+                  </div>
+                  <span class="status">Aan</span>
                 </div>
-                <span class="status">Aan</span>
-              </div>
-            </label>
+              </label>
 
-            <label class="switch-label">
-              <span><i class="fas fa-cloud-showers-heavy"></i> Neerslagkans</span>
-              <div>
-                <div class="switch">
-                  <input type="checkbox" value="precipitation" checked />
-                  <span class="slider"></span>
+              <label class="switch-label">
+                <span><i class="fas fa-cloud-showers-heavy"></i> Neerslagkans</span>
+                <div>
+                  <div class="switch">
+                    <input type="checkbox" value="precipitation" checked />
+                    <span class="slider"></span>
+                  </div>
+                  <span class="status">Aan</span>
                 </div>
-                <span class="status">Aan</span>
-              </div>
-            </label>
+              </label>
 
-            <label class="switch-label">
-              <span><i class="fas fa-sun-plant-wilt"></i> UV-index</span>
-              <div>
-                <div class="switch">
-                  <input type="checkbox" value="uv" checked />
-                  <span class="slider"></span>
+              <label class="switch-label">
+                <span><i class="fas fa-sun-plant-wilt"></i> UV-index</span>
+                <div>
+                  <div class="switch">
+                    <input type="checkbox" value="uv" checked />
+                    <span class="slider"></span>
+                  </div>
+                  <span class="status">Aan</span>
                 </div>
-                <span class="status">Aan</span>
-              </div>
-            </label>
-          </div>
+              </label>
+            </div>
         </div>
 
         <div id="map" style="height: 400px; margin-top: 1rem;"></div>

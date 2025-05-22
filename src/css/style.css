@@ -1,35 +1,40 @@
 /* ================================
-   🌐 BASIS & THEMING
+   🌐 CSS VARIABELEN & THEMING
 ================================ */
 :root {
   /* Kleuren */
   --primary-color: #3498db;
   --primary-dark: #2980b9;
   --secondary-color: #f39c12;
+  --success-color: #4caf50;
+  --danger-color: #e74c3c;
 
+  /* Light theme kleuren */
   --text-color: #333333;
   --light-text: #767676;
-
   --bg-color: #f9f9f9;
   --card-bg: #ffffff;
   --border-color: #e0e0e0;
 
-  /* Schaduw en transities */
+  /* Effecten */
   --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.15);
   --transition: all 0.3s ease;
+  --border-radius: 8px;
 }
-.dark-theme {
+
+/* Dark theme */
+body.dark {
   --text-color: #f5f5f5;
   --light-text: #b5b5b5;
-
   --bg-color: #2c3e50;
   --card-bg: #34495e;
   --border-color: #546e7a;
-
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
+
 /* ================================
-   🔧 ALGEMENE ELEMENTEN
+   🔧 BASIS RESET & TYPOGRAPHY
 ================================ */
 * {
   margin: 0;
@@ -43,14 +48,23 @@ body {
   color: var(--text-color);
   background-color: var(--bg-color);
   transition: var(--transition);
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  margin-bottom: 1rem;
+  color: var(--text-color);
 }
 
 a {
   color: var(--primary-color);
   text-decoration: none;
+  transition: var(--transition);
 }
+
 a:hover {
   text-decoration: underline;
+  color: var(--primary-dark);
 }
 
 button {
@@ -58,6 +72,7 @@ button {
   background: none;
   border: none;
   outline: none;
+  transition: var(--transition);
 }
 
 .hidden {
@@ -74,84 +89,113 @@ button {
   padding: 0 1rem;
 }
 
+header {
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
 header .container {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+main {
+  padding: 2rem 0;
 }
 
 /* ================================
-   🔘 KNOPPEN & NAVIGATIE
+   🎨 THEME TOGGLE
 ================================ */
 #theme-toggle-btn {
   background-color: transparent;
-  border: #34495e;
-  color: #b5b5b5;
+  border: 2px solid var(--border-color);
+  color: var(--text-color);
   font-size: 1rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.25rem 0.5rem;
-  transition: color 0.3s;
-}
-#theme-toggle-btn:hover {
-  background-color: var(--primary-dark);
-}
-#theme-toggle-btn i {
-  margin-right: 8px;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
 }
 
+#theme-toggle-btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+/* ================================
+   🔘 TABS NAVIGATIE
+================================ */
 .tabs {
   display: flex;
-  margin-bottom: 1.5rem;
-  border-bottom: 2px solid var(--border-color);
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
+
 .tab-btn {
   padding: 0.75rem 1.5rem;
   font-weight: 600;
   color: var(--light-text);
-  border-bottom: 3px solid transparent;
+  border: 2px solid transparent;
+  border-radius: var(--border-radius);
   transition: var(--transition);
-  margin-right: 1rem;
+  background-color: var(--bg-color);
 }
+
 .tab-btn:hover {
   color: var(--primary-color);
+  border-color: var(--primary-color);
 }
+
 .tab-btn.active {
-  color: var(--primary-color);
-  border-bottom-color: var(--primary-color);
+  color: white;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 /* ================================
-   🔍 ZOEKEN & FILTERS
+   🔍 ZOEKBALK
 ================================ */
 .search-section {
   background-color: var(--card-bg);
   padding: 1.5rem;
-  border-radius: 8px;
-  margin: 1.5rem 0;
+  border-radius: var(--border-radius);
+  margin-bottom: 2rem;
   box-shadow: var(--shadow);
-}
-
-#location-form {
-  margin-bottom: 1.5rem;
 }
 
 .form-group {
   margin-bottom: 1rem;
 }
+
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 600;
+  color: var(--text-color);
 }
 
 .search-input-container {
   display: flex;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius);
   overflow: hidden;
+  transition: var(--transition);
 }
+
+.search-input-container:focus-within {
+  border-color: var(--primary-color);
+}
+
 .search-input-container input {
   flex: 1;
   padding: 0.75rem;
@@ -159,396 +203,80 @@ header .container {
   outline: none;
   background-color: var(--card-bg);
   color: var(--text-color);
+  font-size: 1rem;
 }
+
 .search-input-container button {
   background-color: var(--primary-color);
   color: white;
-  padding: 0 1rem;
+  padding: 0.75rem 1rem;
   transition: var(--transition);
 }
+
 .search-input-container button:hover {
   background-color: var(--primary-dark);
 }
 
 .error-message {
-  color: #e74c3c;
+  color: var(--danger-color);
   font-size: 0.9rem;
   margin-top: 0.5rem;
-}
-
-/* Filters container */
-#weather-filters {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-  background-color: var(--card-bg);
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: var(--shadow);
-  align-items: center;
-}
-
-/* Elke filtergroep netjes uitlijnen */
-.filter-group {
-  flex: 1 1 200px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  font-size: 0.9rem;
-  color: var(--text-color);
-}
-
-.filter-group label {
-  font-weight: 600;
-}
-
-/* Range inputs breder en stijlvol */
-.filter-group input[type="range"] {
-  width: 100%;
-  cursor: pointer;
-}
-
-/* Selectbox styling */
-.filter-group select {
-  width: 100%;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  background-color: var(--card-bg);
-  color: var(--text-color);
-  outline: none;
-  transition: var(--transition);
-}
-.filter-group select:hover,
-.filter-group select:focus {
-  border-color: var(--primary-color);
-}
-
-/* Label: tekst links, switch rechts */
-.switch-label {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 1rem;
-  color: var(--text-color);
-}
-
-/* Icoontjes netjes naast tekst */
-.switch-label i {
-  margin-right: 0.5rem;
-  color: var(--primary-color);
-}
-
-/* Switch stijl */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 46px;
-  height: 24px;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  background-color: #ccc;
-  border-radius: 24px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transition: 0.4s;
-}
-
-.slider::before {
-  position: absolute;
-  content: "";
-  height: 18px;
-  width: 18px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  border-radius: 50%;
-  transition: 0.4s;
-}
-
-.switch input:checked + .slider {
-  background-color: var(--primary-color);
-}
-
-.switch input:checked + .slider::before {
-  transform: translateX(22px);
-}
-
-/* Donkere modus */
-body.dark .switch-label {
-  color: var(--light-text);
-}
-
-body.dark .slider {
-  background-color: #555;
-}
-
-body.dark .switch input:checked + .slider {
-  background-color: #0af;
-}
-
-body.dark .switch-label i {
-  color: #0af;
-}
-/* Container voor sliders */
-.filter-group input[type="range"] {
-  width: 100%;
-  height: 8px;
-  border-radius: 5px;
-  background: #ddd;
-  outline: none;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-/* Track (balk) styling voor WebKit (Chrome, Safari) */
-.filter-group input[type="range"]::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 8px;
-  cursor: pointer;
-  background: linear-gradient(
-    to right,
-    var(--primary-color) 0%,
-    var(--primary-color) var(--range-progress),
-    #ddd var(--range-progress),
-    #ddd 100%
-  );
-  border-radius: 5px;
-}
-
-/* Duim styling WebKit */
-.filter-group input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  margin-top: -6px; /* Om duim te centreren op de track */
-  width: 20px;
-  height: 20px;
-  background: var(--primary-color);
-  border-radius: 50%;
-  border: 2px solid #fff;
-  box-shadow: 0 0 4px rgba(0,0,0,0.3);
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-/* Track (balk) styling Firefox */
-.filter-group input[type="range"]::-moz-range-track {
-  width: 100%;
-  height: 8px;
-  background: #ddd;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-/* Duim Firefox */
-.filter-group input[type="range"]::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  background: var(--primary-color);
-  border-radius: 50%;
-  border: 2px solid #fff;
-  box-shadow: 0 0 4px rgba(0,0,0,0.3);
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-/* Track (balk) styling Edge & IE */
-.filter-group input[type="range"]::-ms-track {
-  width: 100%;
-  height: 8px;
-  background: transparent;
-  border-color: transparent;
-  color: transparent;
-  cursor: pointer;
-}
-.filter-group input[type="range"]::-ms-fill-lower {
-  background: var(--primary-color);
-  border-radius: 5px;
-}
-.filter-group input[type="range"]::-ms-fill-upper {
-  background: #ddd;
-  border-radius: 5px;
-}
-.filter-group input[type="range"]::-ms-thumb {
-  width: 20px;
-  height: 20px;
-  background: var(--primary-color);
-  border-radius: 50%;
-  border: 2px solid #fff;
-  box-shadow: 0 0 4px rgba(0,0,0,0.3);
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-/* Hover en active states voor duim */
-.filter-group input[type="range"]:hover::-webkit-slider-thumb {
-  background: var(--primary-dark);
-}
-.filter-group input[type="range"]:active::-webkit-slider-thumb {
-  background: var(--primary-dark);
-}
-.filter-group input[type="range"]:hover::-moz-range-thumb {
-  background: var(--primary-dark);
-}
-.filter-group input[type="range"]:active::-moz-range-thumb {
-  background: var(--primary-dark);
-}
-
-/* Optioneel: focus styling */
-.filter-group input[type="range"]:focus {
-  outline: none;
-  box-shadow: 0 0 8px var(--primary-color);
-}
-/* Algemeen verbeterde zichtbaarheid */
-.filter-group input[type="range"] {
-  width: 100%;
-  height: 8px;
-  border-radius: 5px;
-  background: #ccc;
-  outline: none;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-/* Visueel verschil op basis van waarde (via class) */
-input[type="range"].active {
-  background: var(--primary-color);
-}
-
-/* Thumb duidelijk zichtbaar */
-.filter-group input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  margin-top: -6px;
-  width: 20px;
-  height: 20px;
-  background: var(--primary-color);
-  border-radius: 50%;
-  border: 2px solid #fff;
-  box-shadow: 0 0 4px rgba(0,0,0,0.3);
-}
-
-body.light .filter-group input[type="range"]::-webkit-slider-thumb {
-  background: var(--primary-dark);
-}
-
-body.dark .filter-group input[type="range"] {
-  background: #666;
-}
-
-body.dark .filter-group input[type="range"]::-webkit-slider-thumb {
-  background: #0af;
-}
-/* Verbeterde zichtbaarheid van sliders */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 26px;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: #ccc;
-  transition: 0.4s;
-  border-radius: 26px;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.2);
-}
-
-.slider::before {
-  position: absolute;
-  content: "";
-  height: 22px;
-  width: 22px;
-  left: 2px;
-  bottom: 2px;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
-  box-shadow: 0 0 2px rgba(0,0,0,0.3);
-}
-
-.switch input:checked + .slider {
-  background-color: var(--primary-color);
-}
-
-.switch input:checked + .slider::before {
-  transform: translateX(24px);
-}
-
-/* Donkere modus ondersteuning */
-body.dark .slider {
-  background-color: #555;
-}
-body.dark .switch input:checked + .slider {
-  background-color: #0af;
-}
-
-/* Actieve status tekst tonen */
-.switch-label {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: 0.5rem;
 }
 
-.switch-label span.status {
-  font-weight: bold;
-  font-size: 0.9rem;
-  color: var(--text-color);
-}
-
-body.dark .switch-label span.status {
-  color: var(--light-text);
-}
-
-
 /* ================================
-   🌤️ WEERKAARTEN & INFO
+   🌤️ HOOFDLAYOUT WEATHER SECTIE
 ================================ */
 .weather-section {
   margin-bottom: 2rem;
-  position: relative;
-  overflow: auto;
 }
 
-.weather-grid {
+/* Layout voor current weather sectie */
+#current-weather {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.5rem;
+  grid-template-columns: 1fr;
 }
 
+/* Container voor extra info en sliders naast elkaar */
+.info-sliders-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Op kleinere schermen onder elkaar */
+@media (max-width: 768px) {
+  .info-sliders-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+#map {
+  width: 100%;
+  height: 400px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+/* ================================
+   🌡️ WEERKAARTEN
+================================ */
 .weather-card {
   background-color: var(--card-bg);
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   padding: 1.5rem;
   box-shadow: var(--shadow);
   transition: var(--transition);
   position: relative;
 }
+
 .weather-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-hover);
 }
 
 .favorite-btn {
@@ -560,336 +288,144 @@ body.dark .switch-label span.status {
   background: none;
   border: none;
   cursor: pointer;
+  transition: var(--transition);
+}
+
+.favorite-btn:hover {
+  transform: scale(1.1);
 }
 
 .weather-icon {
   text-align: center;
   margin: 1rem 0;
+  font-size: 3rem;
 }
 
 .temperature {
   font-size: 2.5rem;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
 }
 
 .weather-info {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 0.75rem;
   margin-top: 1rem;
 }
+
 .info-item {
   display: flex;
   align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
 }
+
 .info-item i {
-  margin-right: 8px;
+  color: var(--primary-color);
+  width: 16px;
+}
+
+/* ================================
+   📊 EXTRA WEERINFO
+================================ */
+.extra-weather-info {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.extra-weather-info h2 {
+  margin-bottom: 1rem;
+  color: var(--text-color);
+  font-size: 1.25rem;
+}
+
+.extra-weather-info ul {
+  list-style: none;
+}
+
+.extra-weather-info li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+
+.extra-weather-info li:last-child {
+  border-bottom: none;
+}
+
+.extra-weather-info li i {
+  color: var(--primary-color);
+  width: 20px;
+  margin-right: 0.5rem;
+}
+
+.extra-weather-info span {
+  font-weight: 600;
   color: var(--primary-color);
 }
 
 /* ================================
-   📊 VOORSPELLING & DETAILS
+   🎚️ FILTERS & SWITCHES
 ================================ */
-.forecast-container {
-  max-height: 400px;
-  overflow-y: auto;
-  padding: 1rem;
-  background-color: var(--bg-color);
-  border-radius: 8px;
-  box-shadow: var(--shadow);
-  margin-top: 1rem;
-}
-.forecast-grid {
-  display: flex;
-  gap: 1rem;
-  padding-bottom: 1rem;
-}
-.forecast-card {
-  min-width: 160px;
+.filters {
   background-color: var(--card-bg);
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: var(--shadow);
-  text-align: center;
-}
-.forecast-list {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  padding: 1rem 0;
-  background: var(--bg-color);
-  border-radius: 8px;
-}
-.forecast-day {
-  background: white;
-  border-radius: 8px;
-  padding: 1rem;
-  min-width: 140px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  flex-shrink: 0;
-  text-align: center;
-  color: #333;
-}
-.forecast-day .date {
-  font-weight: 700;
-  margin-bottom: 0.4rem;
-}
-.forecast-day .weather-desc {
-  font-size: 1.1rem;
-  margin-bottom: 0.6rem;
-}
-.forecast-day .temp {
-  font-size: 0.95rem;
-  margin-bottom: 0.3rem;
-}
-.forecast-day .precipitation {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #0077be;
-}
-
-/* ================================
-   💬 EXTRA INFO & LOADER
-================================ */
-.message-container {
-  background-color: var(--card-bg);
-  border-radius: 8px;
-  padding: 2rem;
-  text-align: center;
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
   box-shadow: var(--shadow);
 }
 
-.extra-weather-filters {
-  margin-top: 1rem;
-  padding: 1rem;
-  border: 1px solid var(--border-color);
-  background: var(--bg-color);
-}
-.extra-weather-filters label {
-  display: inline-block;
-  margin-right: 1rem;
-  cursor: pointer;
+.filters h3 {
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+  font-size: 1.25rem;
 }
 
-#extra-weather-info ul {
-  list-style: none;
-  padding-left: 0;
-}
-#extra-weather-info li {
-  margin-bottom: 0.5rem;
-}
-
-.loader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-left-color: var(--primary-color);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* ================================
-   📍 KAART & DETAIL MODAL
-================================ */
-#map {
-  width: 100%;
-  height: 400px;
-  margin: 1rem 0;
-  border-radius: 12px;
-  position: relative;
-  z-index: 0;
-}
-.forecast-container,
-.weather-card,
-.weather-section * {
-  position: relative;
-  z-index: 1;
-}
-
-#weather-detail {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-#detail-content {
-  background-color: var(--card-bg);
-  width: 90%;
-  max-width: 800px;
-  max-height: 90vh;
-  overflow-y: auto;
-  border-radius: 8px;
-  padding: 2rem;
-  position: relative;
-}
-.close-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 1.5rem;
-  color: var(--light-text);
-  cursor: pointer;
-  z-index: 1001;
-}
-
-/* ================================
-   📌 FOOTER
-================================ */
-footer {
-  background-color: var(--card-bg);
-  padding: 1.5rem 0;
-  text-align: center;
-  margin-top: 2rem;
-  color: var(--light-text);
-  border-top: 1px solid var(--border-color);
-}
-/* Basis reset */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.4;
-  background-color: #f0f0f0;
-  color: #222;
-  transition: background-color 0.3s, color 0.3s;
-  min-height: 100vh;
-  padding: 1rem;
-}
-
-/* THEMES */
-body.light {
-  background-color: #fefefe;
-  color: #222;
-}
-
-body.dark {
-  background-color: #121212;
-  color: #eee;
-}
-
-/* Container #current-weather met 3 duidelijke delen */
-#current-weather {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-/* 1) Kaart + basisinfo */
-#weather-basic {
-  flex: 1 1 300px;
-  background: var(--card-bg);
-  border-radius: 10px;
-  box-shadow: var(--card-shadow);
-  padding: 1rem;
-  min-width: 280px;
-  max-width: 500px;
-}
-
-/* #map moet altijd een hoogte hebben */
-#map {
-  width: 100%;
-  height: 300px;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-}
-
-/* Basisinfo (stad + temp etc) */
-.weather-card h3 {
-  margin-bottom: 0.3rem;
-}
-
-.weather-icon {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
-}
-
-.temperature {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-.weather-info {
-  display: flex;
-  gap: 1rem;
-  font-size: 1rem;
-}
-
-.info-item {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-}
-
-/* 2) Extra info container */
-#extra-weather-info {
-  flex: 1 1 300px;
-  background: var(--card-bg);
-  border-radius: 10px;
-  box-shadow: var(--card-shadow);
-  padding: 1rem;
-  min-width: 280px;
-  max-width: 400px;
-  overflow-y: auto;
-  max-height: 300px;
-}
-
-/* 3) Sliders container */
-#sliders-container {
-  flex: 1 1 200px;
-  background: var(--card-bg);
-  border-radius: 10px;
-  box-shadow: var(--card-shadow);
-  padding: 1rem;
-  min-width: 220px;
-  max-width: 300px;
-}
-
-/* Sliders: label + input */
-.slider-label {
+.switch-label {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: 600;
-  margin-bottom: 0.6rem;
+  padding: 0.75rem 0;
   cursor: pointer;
-  user-select: none;
+  transition: var(--transition);
 }
 
-/* Toggle switch styling */
-.toggle-switch {
+.switch-label:hover {
+  background-color: var(--bg-color);
+  margin: 0 -0.5rem;
+  padding: 0.75rem 0.5rem;
+  border-radius: var(--border-radius);
+}
+
+.switch-label span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.switch-label i {
+  color: var(--primary-color);
+  width: 16px;
+}
+
+/* Toggle Switch */
+.switch {
   position: relative;
   display: inline-block;
-  width: 45px;
-  height: 24px;
+  width: 50px;
+  height: 26px;
+  margin-right: 0.5rem;
 }
 
-.toggle-switch input {
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -898,149 +434,265 @@ body.dark {
 .slider {
   position: absolute;
   cursor: pointer;
-  background-color: #ccc;
-  border-radius: 34px;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  background-color: #ccc;
   transition: 0.4s;
+  border-radius: 34px;
 }
 
 .slider:before {
   position: absolute;
   content: "";
-  height: 18px;
-  width: 18px;
+  height: 20px;
+  width: 20px;
   left: 3px;
   bottom: 3px;
   background-color: white;
-  border-radius: 50%;
   transition: 0.4s;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-/* Checked */
-.toggle-switch input:checked + .slider {
-  background-color: #4caf50;
+.switch input:checked + .slider {
+  background-color: var(--success-color);
 }
 
-.toggle-switch input:checked + .slider:before {
-  transform: translateX(21px);
+.switch input:checked + .slider:before {
+  transform: translateX(24px);
 }
 
-/* Focus styling */
-.toggle-switch input:focus + .slider {
-  box-shadow: 0 0 2px 3px #80bdff;
-}
-
-/* Tekst naast de toggle die aangeeft aan/uit */
-.toggle-status {
+.status {
   font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--status-color);
-  user-select: none;
-  width: 30px;
+  font-weight: 600;
+  min-width: 30px;
   text-align: center;
-  margin-left: 0.5rem;
 }
 
-/* Verschil aan/uit kleur */
-.toggle-status.on {
-  color: #4caf50;
+.switch input:checked ~ .status {
+  color: var(--success-color);
 }
 
-.toggle-status.off {
-  color: #ccc;
+/* ================================
+   📈 FORECAST SECTIE
+================================ */
+.forecast-container {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
 }
 
-/* Variabelen per thema */
-body.light {
-  --card-bg: #ffffff;
-  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  --status-color: #4caf50;
-}
-
-body.dark {
-  --card-bg: #1e1e1e;
-  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-  --status-color: #4caf50;
-}
-
-/* Responsiveness */
-@media (max-width: 900px) {
-  #current-weather {
-    flex-direction: column;
-  }
-  #weather-basic, #extra-weather-info, #sliders-container {
-    max-width: 100%;
-  }
-}
-
-/* Favorieten container styling */
-#favorites-container {
-  background: var(--card-bg);
-  border-radius: 10px;
-  box-shadow: var(--card-shadow);
-  padding: 1rem;
-  margin-bottom: 2rem;
-}
-
-/* Weerkaarten styling */
-.weather-card {
-  background: var(--card-bg);
-  border-radius: 10px;
-  box-shadow: var(--card-shadow);
-  padding: 1rem;
-  margin-bottom: 1rem;
-  position: relative;
-}
-
-.favorite-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  font-size: 1.4rem;
-  cursor: pointer;
-  color: #e74c3c;
-}
-
-.favorite-btn:hover {
-  color: #c0392b;
-}
-
-/* Error message styling */
-#error-message,
-#location-error {
-  color: #e74c3c;
-  margin-top: 0.5rem;
-}
-
-/* Tabs styling */
-.tabs {
+.forecast-list {
   display: flex;
   gap: 1rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+}
+
+.forecast-day {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  min-width: 160px;
+  text-align: center;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.forecast-day:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+}
+
+.forecast-day .date {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.forecast-day .weather-desc {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.forecast-day .temp {
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.forecast-day .precipitation {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* ================================
+   ❤️ FAVORIETEN
+================================ */
+.weather-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+#favorites-container {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.remove-favorite-btn {
+  background-color: var(--danger-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.remove-favorite-btn:hover {
+  background-color: #c0392b;
+}
+
+/* ================================
+   💬 LOADER & MESSAGES
+================================ */
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
   margin-bottom: 1rem;
 }
 
-.tab-btn {
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  background: var(--card-bg);
-  border: none;
-  border-radius: 6px;
-  box-shadow: var(--card-shadow);
-  font-weight: 600;
-  transition: background-color 0.3s;
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.tab-btn.active {
-  background-color: #4caf50;
-  color: white;
+.message-container {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+  color: var(--light-text);
 }
 
-/* Verbetering: cursor pointer op sliders-labels */
-.slider-label:hover {
-  color: #4caf50;
+/* ================================
+   📱 RESPONSIVE DESIGN
+================================ */
+@media (max-width: 768px) {
+  header .container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .tabs {
+    justify-content: center;
+    margin: 1rem 0;
+  }
+  
+  .info-and-sliders {
+    grid-template-columns: 1fr;
+  }
+  
+  .weather-info {
+    grid-template-columns: 1fr;
+  }
+  
+  .forecast-list {
+    padding: 0.5rem 0;
+  }
+  
+  .forecast-day {
+    min-width: 140px;
+  }
+  
+  .container {
+    padding: 0 0.5rem;
+  }
 }
+
+@media (max-width: 480px) {
+  .tab-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .temperature {
+    font-size: 2rem;
+  }
+  
+  .weather-icon {
+    font-size: 2.5rem;
+  }
+  
+  .search-input-container {
+    flex-direction: column;
+  }
+  
+  .search-input-container button {
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+  }
+}
+
+/* ================================
+   🌙 FOOTER
+================================ */
+footer {
+  background-color: var(--card-bg);
+  padding: 2rem 0;
+  text-align: center;
+  margin-top: 3rem;
+  color: var(--light-text);
+  border-top: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+}
+
+footer p {
+  margin-bottom: 0.5rem;
+}
+
+/* ================================
+   🎯 UTILITY CLASSES
+================================ */
+.text-center {
+  text-align: center;
+}
+
+.text-primary {
+  color: var(--primary-color);
+}
+
+.text-muted {
+  color: var(--light-text);
+}
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+
+.p-1 { padding: 0.5rem; }
+.p-2 { padding: 1rem; }
+.p-3 { padding: 1.5rem; }

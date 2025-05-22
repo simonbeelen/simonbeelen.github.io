@@ -1,5 +1,5 @@
 // Importeer Leaflet voor het renderen van de kaart
-import L from '/Leaflet';
+import L from 'leaflet';
 
 // ======================================
 // DOM-ELEMENTEN

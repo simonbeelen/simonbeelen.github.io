@@ -1,7 +1,6 @@
 
-// ======================================
 // DOM-ELEMENTEN
-// ======================================
+
 const body = document.body;
 const themeToggleBtn = document.getElementById('theme-toggle-btn');
 const locationForm = document.getElementById('location-form');
@@ -17,10 +16,9 @@ const extraWeatherInfo = document.getElementById('extra-weather-info');
 // Selecteer alle informatie filters
 const infoFilters = document.querySelectorAll('#weather-filters input[type="checkbox"]');
 
-// ======================================
 // GLOBALE VARIABELEN
-// ======================================
-let currentExtraWeatherData = null; // Extra weerdata bewaren
+
+let currentExtraWeatherData = null; 
 let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 let currentWeatherData = null;
 let filterSettings = JSON.parse(localStorage.getItem('weather-filters')) || {
@@ -34,9 +32,9 @@ let filterSettings = JSON.parse(localStorage.getItem('weather-filters')) || {
 };
 let map; // Leaflet kaart
 
-// ======================================
+
 // HELPER FUNCTIES
-// ======================================
+
 function setupIntersectionObserver(targetElement, callback) {
   if (!targetElement) return;
 
@@ -137,9 +135,9 @@ function safeSetTextContent(elementId, value) {
   }
 }
 
-// ======================================
+
 // API FUNCTIES
-// ======================================
+
 
 // 1. Geocoding: stad naar coords
 async function fetchCoords(city) {
@@ -187,9 +185,9 @@ async function fetchExtraWeatherData(lat, lon) {
   }
 }
 
-// ======================================
+
 // RENDER FUNCTIES
-// ======================================
+
 
 // 1. Weerkaart maken (huidig weer)
 function createWeatherCard(weather, location) {
@@ -227,7 +225,7 @@ function renderWeatherList(weatherList) {
   weatherContainer.innerHTML = weatherList.map(item => createWeatherCard(item.weather, item.location)).join('');
 }
 
-// 3. Forecast renderen met verbeterde layout
+// 3. Forecast renderen 
 function renderForecast(daily) {
   if (!forecastContainer) {
     console.warn('Forecast container not found');
@@ -266,13 +264,13 @@ function renderForecast(daily) {
     </div>
   `;
 
-  // Wacht even voordat we de grafiek tekenen
+  
   setTimeout(() => {
     drawPrecipitationChart(daily.time, daily.precipitation_sum);
   }, 100);
 }
 
-// 4. Extra weerinfo tonen met verbeterde data handling
+// 4. Extra weerinfo tonen 
 function updateExtraWeatherInfo(data) {
   if (!extraWeatherInfo) {
     console.warn('Extra weather info container not found');
@@ -393,7 +391,7 @@ function drawPrecipitationChart(dates, precipitation) {
   }
 
   // Basisinstellingen
-  const maxPrecip = Math.max(...precipitation, 1); // Minimum 1 om deling door 0 te voorkomen
+  const maxPrecip = Math.max(...precipitation, 1); 
   const margin = 60;
   const width = canvas.width - margin * 2;
   const height = canvas.height - margin * 2;
@@ -455,9 +453,9 @@ function drawPrecipitationChart(dates, precipitation) {
   ctx.fillText('Neerslag per dag (mm)', canvas.width / 2, 20);
 }
 
-// ======================================
+
 // FAVORIETEN BEHEER
-// ======================================
+
 
 // 1. Favoriet toevoegen
 function addFavorite(weather, location) {
@@ -490,9 +488,9 @@ function removeFavorite(name, country) {
   }
 }
 
-// ======================================
+
 // FILTER FUNCTIES
-// ======================================
+
 
 // 1. Extra info filters toepassen 
 function applyInfoFilters() {
@@ -506,7 +504,7 @@ function applyInfoFilters() {
       statusSpan.textContent = isChecked ? 'Aan' : 'Uit';
     }
     
-    // Speciale behandeling voor sunrise filter (controleert beide elementen)
+    // Speciale behandeling voor sunrise filter
     if (value === 'sunrise') {
       const sunriseElement = document.querySelector('.filter-sunrise');
       const sunsetElement = document.querySelector('.filter-sunset');
@@ -564,9 +562,9 @@ function loadFilterSettings() {
   });
 }
 
-// ======================================
+
 // UTILITY FUNCTIES
-// ======================================
+
 
 // 1. Datum formatteren
 function formatDate(dateString, shortFormat = false) {
@@ -600,9 +598,9 @@ function applyDayNightTheme() {
   }
 }
 
-// ======================================
+
 // EVENT LISTENERS
-// ======================================
+
 
 // 1. Thema toggle
   if (themeToggleBtn) {
@@ -760,9 +758,9 @@ infoFilters.forEach(checkbox => {
   });
 });
 
-// ======================================
+
 // INITIALISATIE
-// ======================================
+
 document.addEventListener('DOMContentLoaded', () => {
   applyDayNightTheme();
   renderFavorites();

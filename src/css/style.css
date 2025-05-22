@@ -110,9 +110,7 @@ button {
   max-width: 100%;
 }
 
-/* ================================
-   📱 RESPONSIVE AANPASSINGEN
-================================ */
+/* aanpassen aan formaat */
 @media (max-width: 768px) {
   .forecast-grid {
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -219,9 +217,7 @@ main {
   border-color: var(--primary-color);
 }
 
-/* ================================
-   🔘 TABS NAVIGATIE
-================================ */
+/*Tabs navigatie*/
 .tabs {
   display: flex;
   gap: 0.5rem;
@@ -249,9 +245,7 @@ main {
   border-color: var(--primary-color);
 }
 
-/* ================================
-   🔍 ZOEKBALK
-================================ */
+/* Zoekbalk */
 .search-section {
   background-color: var(--card-bg);
   padding: 1.5rem;
@@ -320,14 +314,14 @@ main {
   margin-bottom: 2rem;
 }
 
-/* Layout voor current weather sectie */
+
 #current-weather {
   display: grid;
   gap: 1.5rem;
   grid-template-columns: 1fr;
 }
 
-/* Container voor extra info en sliders naast elkaar */
+
 .info-sliders-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -335,7 +329,7 @@ main {
   margin-bottom: 1.5rem;
 }
 
-/* Op kleinere schermen onder elkaar */
+
 @media (max-width: 768px) {
   .info-sliders-container {
     grid-template-columns: 1fr;
@@ -415,9 +409,7 @@ main {
   width: 16px;
 }
 
-/* ================================
-   📊 EXTRA WEERINFO
-================================ */
+/* extra weerinfo */
 .extra-weather-info {
   background-color: var(--card-bg);
   border-radius: var(--border-radius);
@@ -686,9 +678,7 @@ main {
   background-color: #c0392b;
 }
 
-/* ================================
-   💬 LOADER & MESSAGES
-================================ */
+/* Loader */
 .loader {
   display: flex;
   flex-direction: column;
@@ -725,9 +715,9 @@ main {
   color: var(--light-text);
 }
 
-/* ================================
-   📱 RESPONSIVE DESIGN
-================================ */
+/* 
+   RESPONSIVE DESIGN
+ */
 @media (max-width: 768px) {
   header .container {
     flex-direction: column;
@@ -783,9 +773,9 @@ main {
   }
 }
 
-/* ================================
-   🌙 FOOTER
-================================ */
+
+  /* FOOTER */
+
 footer {
   background-color: var(--card-bg);
   padding: 2rem 0;
@@ -800,9 +790,7 @@ footer p {
   margin-bottom: 0.5rem;
 }
 
-/* ================================
-   🎯 UTILITY CLASSES
-================================ */
+
 .text-center {
   text-align: center;
 }

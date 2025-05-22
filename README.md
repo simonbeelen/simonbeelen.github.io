@@ -39,7 +39,9 @@ Weerbericht is een webaplicatie gemaakt door Simon Beelen voor het vak Web Advan
 Ook toevoeging van screenshots waarin deze vereiste werden gevraagd. Disclaimer er is altijd enkel één voorbeeld gekozen, dus er kunnen meerdere codes zijn die deze elementen bevatten.
 ### DOM Manipulatie
 - **Elementen selecteren**: document.getElementById(), document.querySelectorAll() main.js 7-20
+  
   ![image](https://github.com/user-attachments/assets/8b17dbb2-a9f2-4ac8-8805-04f9a187169d)
+  
 - **Elementen manipuleren**: main.js 571 - 581
   
   ![image](https://github.com/user-attachments/assets/fd256d64-24c8-41d0-a199-1122785f5d47)
@@ -52,6 +54,7 @@ Ook toevoeging van screenshots waarin deze vereiste werden gevraagd. Disclaimer 
   ![image](https://github.com/user-attachments/assets/c06626d7-979d-449c-a5aa-d5753468d4b7)
   
 - **Template Literals**
+  
   ![image](https://github.com/user-attachments/assets/56b2c0d1-6b15-40cd-aa72-1edbe47b0d86)
   
 - **Array Methodes, Arrow Functions en Iteratie over Array**
@@ -61,6 +64,7 @@ Ook toevoeging van screenshots waarin deze vereiste werden gevraagd. Disclaimer 
   ![image](https://github.com/user-attachments/assets/642f681c-3392-4236-ae69-16381932ab80)
   
 - **Callback Functions, intersection observer**:
+  
   ![image](https://github.com/user-attachments/assets/c10890b4-3833-4d16-b762-85c5598f1306)
   
 - **Promises, Async en Await**:
@@ -71,6 +75,7 @@ Ook toevoeging van screenshots waarin deze vereiste werden gevraagd. Disclaimer 
   ![image](https://github.com/user-attachments/assets/2046dadd-f8c4-4ef4-9fc8-2092a9eb0c86)
   
 - **JSON Manipulatie**
+  
   ![image](https://github.com/user-attachments/assets/c961c05f-60ee-452d-be7f-ea5efea5faa6)
   
 ### Opslag en Validatie
@@ -78,6 +83,7 @@ Ook toevoeging van screenshots waarin deze vereiste werden gevraagd. Disclaimer 
   ![image](https://github.com/user-attachments/assets/ba88467d-f317-4fca-88b2-687ed1618d92)
   
 - **Localstorage**
+- 
   ![image](https://github.com/user-attachments/assets/7a3044b3-42d7-49c1-8736-377dc32d7555)
 
 ### HTML 
@@ -86,6 +92,35 @@ Ook toevoeging van screenshots waarin deze vereiste werden gevraagd. Disclaimer 
 ### CSS
 - Styles.css
 
-## Project structuur
-w
+##**Installatie**
+### **Vereisten**
+- Node.js (versie 14+) https://nodejs.org/
+- NPM 
+- Git  (https://git-scm.com/
+
+### **Stappen**
+
+**1. Clone de repository**
+
+    1. Open de Terminal/Comand Prompt 
+    
+        * git clone https://github.com/simonbeelen/weerbericht.git
+        
+    2. Ga naar de project folder
+    
+        * cd Weerbericht
+        
+**2. Dependencies installeren**
+
+  1. Installeer alle nodige packages
+
+       * npm install
+    
+**3. Opstarten Productie Build en deployment**
+
+  1. Build de applicatie en bekijk een preview
+
+       * npm run build
+         
+       * npm run preview
 

@@ -92,7 +92,7 @@ Ook toevoeging van screenshots waarin deze vereiste werden gevraagd. Disclaimer 
 ### CSS
 - Styles.css
 
-##**Installatie**
+## **Installatie**
 ### **Vereisten**
 - Node.js (versie 14+) https://nodejs.org/
 - NPM 
@@ -104,11 +104,11 @@ Ook toevoeging van screenshots waarin deze vereiste werden gevraagd. Disclaimer 
 
     1. Open de Terminal/Comand Prompt 
     
-        * git clone https://github.com/simonbeelen/weerbericht.git
+        * git clone https://github.com/simonbeelen/simonbeelen.github.io.git
         
     2. Ga naar de project folder
     
-        * cd Weerbericht
+        * cd simonbeelen.github.io
         
 **2. Dependencies installeren**
 
